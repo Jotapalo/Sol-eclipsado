@@ -1,41 +1,36 @@
 package com.example.soleclipsado.controllers;
 
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
 
-import java.io.IOException;
+import com.example.soleclipsado.models.SecretWord;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.Node;
+import javafx.scene.text.Text;
 
 public class GameController {
 
-    @FXML
-    private TextField textFieldSecretWord;
+    //public Button[][] keyword;
 
     @FXML
-    public void onMouseClickedPlayButton(MouseEvent mouseEvent) throws IOException {
+    Text textSecretReveal;
 
-        if (validateText(textFieldSecretWord.getText())) {
-            System.out.println("Texto Valido");
-            Parent root = FXMLLoader.load(getClass().getResource("/com/example/soleclipsado/main-view.fxml"));
-            Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        } else {
-            System.out.println("Texto Invalido");
-        }
+    SecretWord secretWord;
 
-        System.out.println("Clicked on play button");
+    public void setSecretWord(SecretWord s){
+        secretWord = s;
+        textSecretReveal.setText(secretWord.getWord());
     }
 
-    // Uso de expresiones regulares para validar que un texto no contenga espacios o caracteres diferentes del alfabeto
-    // español
-    public static boolean validateText(String texto) {
-        return texto.matches("^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+$");
+    public char onActionKey(ActionEvent event){
+        //
+        Node node = (Node) event.getSource();
+        String id = node.getId();
+        node.setDisable(true);
+
+        System.out.print("Button click " + id);
+        return 0;
     }
+
+
+
 }
