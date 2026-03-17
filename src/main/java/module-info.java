@@ -8,4 +8,5 @@ module com.example.soleclipsado {
     opens com.example.soleclipsado.controllers to javafx.fxml;
     opens com.example.soleclipsado.images to javafx.fxml;
     exports com.example.soleclipsado;
+    opens com.example.soleclipsado.views to javafx.fxml;
 }
