@@ -3,6 +3,7 @@ package com.example.soleclipsado.controllers;
 import com.example.soleclipsado.models.SecretWord;
 import com.example.soleclipsado.views.GameView;
 import com.example.soleclipsado.views.SecretWordView;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -15,8 +16,7 @@ public class SecretWordController {
     private TextField textFieldSecretWord;
 
     @FXML
-    public void onMouseClickedPlayButton(MouseEvent mouseEvent) throws IOException {
-
+    public void onActionPlayButton(ActionEvent actionEvent) throws IOException {
         if (validateText(textFieldSecretWord.getText())) {
             //Obtener la palabra ingresada y guardarla
             String word = textFieldSecretWord.getText();
@@ -26,7 +26,10 @@ public class SecretWordController {
             //Obtener la instancia del GameView
             GameView gameView = GameView.getInstance();
             GameController gameController = gameView.getController();
-            /*gameController.setSecretWord(secret);*/
+
+            //Establecer la palabra secreta y crear los campos de las letras
+            gameController.setSecretWord(secret);
+            gameController.createCharFields(secret.getWord());
 
             //Muestra la ventana de juego
             gameView.show();
