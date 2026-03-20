@@ -9,10 +9,9 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.soleclipsado.controllers.GameController">
    <top>
@@ -26,12 +25,19 @@
                   <Image url="@images/pngwing.com.png" />
                </image>
             </ImageView>
-            <Pane prefHeight="41.0" prefWidth="600.0">
+            <VBox alignment="CENTER">
                <children>
-                  <Text fx:id="textSecretReveal" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" text="Adivina la palabra secreta" textAlignment="CENTER" textFill="#837f01">
+                     <font>
+                        <Font name="Arial Bold" size="19.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="11.0" />
+                     </VBox.margin>
+                  </Label>
                </children>
-            </Pane>
-            <HBox fx:id="HboxCharFields" prefHeight="100.0" prefWidth="200.0" />
+            </VBox>
+            <HBox fx:id="HboxCharFields" alignment="CENTER" prefHeight="100.0" prefWidth="600.0" />
          </children>
       </VBox>
    </top>
@@ -56,33 +62,33 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button fx:id="a" mnemonicParsing="false" onAction="#onActionKey" prefHeight="35.0" prefWidth="40.0" text="a" />
-                  <Button fx:id="b" mnemonicParsing="false" onAction="#onActionKey" prefHeight="35.0" prefWidth="40.0" text="b" GridPane.columnIndex="1" />
-                  <Button fx:id="c" mnemonicParsing="false" onAction="#onActionKey" prefHeight="35.0" prefWidth="40.0" text="c" GridPane.columnIndex="2" />
-                  <Button fx:id="d" mnemonicParsing="false" onAction="#onActionKey" prefHeight="35.0" prefWidth="40.0" text="d" GridPane.columnIndex="3" />
-                  <Button fx:id="e" mnemonicParsing="false" onAction="#onActionKey" prefHeight="35.0" prefWidth="40.0" text="e" GridPane.columnIndex="4" />
-                  <Button fx:id="f" mnemonicParsing="false" onAction="#onActionKey" prefHeight="35.0" prefWidth="40.0" text="f" GridPane.columnIndex="5" />
-                  <Button fx:id="g" mnemonicParsing="false" onAction="#onActionKey" prefHeight="35.0" prefWidth="40.0" text="g" GridPane.columnIndex="6" />
-                  <Button fx:id="h" mnemonicParsing="false" onAction="#onActionKey" prefHeight="35.0" prefWidth="40.0" text="h" GridPane.columnIndex="7" />
-                  <Button fx:id="i" mnemonicParsing="false" onAction="#onActionKey" prefHeight="35.0" prefWidth="40.0" text="i" GridPane.columnIndex="8" />
-                  <Button fx:id="j" mnemonicParsing="false" onAction="#onActionKey" prefHeight="35.0" prefWidth="40.0" text="j" GridPane.rowIndex="1" />
-                  <Button fx:id="k" mnemonicParsing="false" onAction="#onActionKey" prefHeight="35.0" prefWidth="40.0" text="k" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Button fx:id="l" mnemonicParsing="false" onAction="#onActionKey" prefHeight="35.0" prefWidth="40.0" text="l" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                  <Button fx:id="m" mnemonicParsing="false" onAction="#onActionKey" prefHeight="35.0" prefWidth="40.0" text="m" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                  <Button fx:id="n" mnemonicParsing="false" onAction="#onActionKey" prefHeight="35.0" prefWidth="40.0" text="n" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                  <Button fx:id="ñ" mnemonicParsing="false" onAction="#onActionKey" prefHeight="35.0" prefWidth="40.0" text="ñ" GridPane.columnIndex="5" GridPane.rowIndex="1" />
-                  <Button fx:id="o" mnemonicParsing="false" onAction="#onActionKey" prefHeight="35.0" prefWidth="40.0" text="o" GridPane.columnIndex="6" GridPane.rowIndex="1" />
-                  <Button fx:id="p" mnemonicParsing="false" onAction="#onActionKey" prefHeight="35.0" prefWidth="40.0" text="p" GridPane.columnIndex="7" GridPane.rowIndex="1" />
-                  <Button fx:id="q" alignment="CENTER" mnemonicParsing="false" onAction="#onActionKey" prefHeight="35.0" prefWidth="40.0" text="q" GridPane.columnIndex="8" GridPane.rowIndex="1" />
-                  <Button fx:id="r" mnemonicParsing="false" onAction="#onActionKey" prefHeight="35.0" prefWidth="40.0" text="r" GridPane.rowIndex="2" />
-                  <Button fx:id="s" mnemonicParsing="false" onAction="#onActionKey" prefHeight="35.0" prefWidth="40.0" text="s" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Button fx:id="t" mnemonicParsing="false" onAction="#onActionKey" prefHeight="35.0" prefWidth="40.0" text="t" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                  <Button fx:id="u" mnemonicParsing="false" onAction="#onActionKey" prefHeight="35.0" prefWidth="40.0" text="u" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                  <Button fx:id="v" mnemonicParsing="false" onAction="#onActionKey" prefHeight="35.0" prefWidth="40.0" text="v" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-                  <Button fx:id="w" mnemonicParsing="false" onAction="#onActionKey" prefHeight="35.0" prefWidth="40.0" text="w" GridPane.columnIndex="5" GridPane.rowIndex="2" />
-                  <Button mnemonicParsing="false" onAction="#onActionKey" prefHeight="35.0" prefWidth="40.0" text="x" GridPane.columnIndex="6" GridPane.rowIndex="2" fx:id="x" />
-                  <Button fx:id="y" mnemonicParsing="false" onAction="#onActionKey" prefHeight="35.0" prefWidth="40.0" text="y" GridPane.columnIndex="7" GridPane.rowIndex="2" />
-                  <Button fx:id="z" mnemonicParsing="false" onAction="#onActionKey" prefHeight="35.0" prefWidth="40.0" text="z" GridPane.columnIndex="8" GridPane.rowIndex="2" />
+                  <Button fx:id="a" focusTraversable="false" mnemonicParsing="false" onAction="#onActionKey" prefHeight="35.0" prefWidth="40.0" text="a" />
+                  <Button fx:id="b" focusTraversable="false" mnemonicParsing="false" onAction="#onActionKey" prefHeight="35.0" prefWidth="40.0" text="b" GridPane.columnIndex="1" />
+                  <Button fx:id="c" focusTraversable="false" mnemonicParsing="false" onAction="#onActionKey" prefHeight="35.0" prefWidth="40.0" text="c" GridPane.columnIndex="2" />
+                  <Button fx:id="d" focusTraversable="false" mnemonicParsing="false" onAction="#onActionKey" prefHeight="35.0" prefWidth="40.0" text="d" GridPane.columnIndex="3" />
+                  <Button fx:id="e" focusTraversable="false" mnemonicParsing="false" onAction="#onActionKey" prefHeight="35.0" prefWidth="40.0" text="e" GridPane.columnIndex="4" />
+                  <Button fx:id="f" focusTraversable="false" mnemonicParsing="false" onAction="#onActionKey" prefHeight="35.0" prefWidth="40.0" text="f" GridPane.columnIndex="5" />
+                  <Button fx:id="g" focusTraversable="false" mnemonicParsing="false" onAction="#onActionKey" prefHeight="35.0" prefWidth="40.0" text="g" GridPane.columnIndex="6" />
+                  <Button fx:id="h" focusTraversable="false" mnemonicParsing="false" onAction="#onActionKey" prefHeight="35.0" prefWidth="40.0" text="h" GridPane.columnIndex="7" />
+                  <Button fx:id="i" focusTraversable="false" mnemonicParsing="false" onAction="#onActionKey" prefHeight="35.0" prefWidth="40.0" text="i" GridPane.columnIndex="8" />
+                  <Button fx:id="j" focusTraversable="false" mnemonicParsing="false" onAction="#onActionKey" prefHeight="35.0" prefWidth="40.0" text="j" GridPane.rowIndex="1" />
+                  <Button fx:id="k" focusTraversable="false" mnemonicParsing="false" onAction="#onActionKey" prefHeight="35.0" prefWidth="40.0" text="k" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Button fx:id="l" focusTraversable="false" mnemonicParsing="false" onAction="#onActionKey" prefHeight="35.0" prefWidth="40.0" text="l" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <Button fx:id="m" focusTraversable="false" mnemonicParsing="false" onAction="#onActionKey" prefHeight="35.0" prefWidth="40.0" text="m" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                  <Button fx:id="n" focusTraversable="false" mnemonicParsing="false" onAction="#onActionKey" prefHeight="35.0" prefWidth="40.0" text="n" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                  <Button fx:id="ñ" focusTraversable="false" mnemonicParsing="false" onAction="#onActionKey" prefHeight="35.0" prefWidth="40.0" text="ñ" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+                  <Button fx:id="o" focusTraversable="false" mnemonicParsing="false" onAction="#onActionKey" prefHeight="35.0" prefWidth="40.0" text="o" GridPane.columnIndex="6" GridPane.rowIndex="1" />
+                  <Button fx:id="p" focusTraversable="false" mnemonicParsing="false" onAction="#onActionKey" prefHeight="35.0" prefWidth="40.0" text="p" GridPane.columnIndex="7" GridPane.rowIndex="1" />
+                  <Button fx:id="q" alignment="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#onActionKey" prefHeight="35.0" prefWidth="40.0" text="q" GridPane.columnIndex="8" GridPane.rowIndex="1" />
+                  <Button fx:id="r" focusTraversable="false" mnemonicParsing="false" onAction="#onActionKey" prefHeight="35.0" prefWidth="40.0" text="r" GridPane.rowIndex="2" />
+                  <Button fx:id="s" focusTraversable="false" mnemonicParsing="false" onAction="#onActionKey" prefHeight="35.0" prefWidth="40.0" text="s" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Button fx:id="t" focusTraversable="false" mnemonicParsing="false" onAction="#onActionKey" prefHeight="35.0" prefWidth="40.0" text="t" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <Button fx:id="u" focusTraversable="false" mnemonicParsing="false" onAction="#onActionKey" prefHeight="35.0" prefWidth="40.0" text="u" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                  <Button fx:id="v" focusTraversable="false" mnemonicParsing="false" onAction="#onActionKey" prefHeight="35.0" prefWidth="40.0" text="v" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                  <Button fx:id="w" focusTraversable="false" mnemonicParsing="false" onAction="#onActionKey" prefHeight="35.0" prefWidth="40.0" text="w" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+                  <Button focusTraversable="false" mnemonicParsing="false" onAction="#onActionKey" prefHeight="35.0" prefWidth="40.0" text="x" GridPane.columnIndex="6" GridPane.rowIndex="2" fx:id="x" />
+                  <Button fx:id="y" focusTraversable="false" mnemonicParsing="false" onAction="#onActionKey" prefHeight="35.0" prefWidth="40.0" text="y" GridPane.columnIndex="7" GridPane.rowIndex="2" />
+                  <Button fx:id="z" focusTraversable="false" mnemonicParsing="false" onAction="#onActionKey" prefHeight="35.0" prefWidth="40.0" text="z" GridPane.columnIndex="8" GridPane.rowIndex="2" />
                </children>
             </GridPane>
          </children>

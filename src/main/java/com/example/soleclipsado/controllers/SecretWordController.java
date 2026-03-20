@@ -21,14 +21,13 @@ public class SecretWordController {
             //Obtener la palabra ingresada y guardarla
             String word = textFieldSecretWord.getText();
             SecretWord secret = new SecretWord();
-            secret.setWord(word);
+            secret.setWord(word.toUpperCase());
 
             //Obtener la instancia del GameView
             GameView gameView = GameView.getInstance();
             GameController gameController = gameView.getController();
 
             //Establecer la palabra secreta y crear los campos de las letras
-            gameController.setSecretWord(secret);
             gameController.createCharFields(secret.getWord());
 
             //Muestra la ventana de juego

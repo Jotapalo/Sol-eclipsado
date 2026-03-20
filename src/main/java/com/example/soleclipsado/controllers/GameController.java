@@ -9,6 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 public class GameController {
@@ -35,13 +36,13 @@ public class GameController {
         textSecretReveal.setText(secretWord.getWord());
     }
 
-    public char onActionKey(ActionEvent event){
+    public void onActionKey(ActionEvent event){
         // Desactiva la tecla que ha sido presionada por el usuario
         Node node = (Node) event.getSource();
-        String id = node.getId();
+        String id = node.getId().toUpperCase();
         node.setDisable(true);
 
-        System.out.print("Button click " + id);
+        System.out.print("Button click " + id.toUpperCase());
 
         //Recorre los CharField existentes buscando si la letra presionada en el evento coincide con alguna de la palabra
         for (Node n : HboxCharFields.getChildren()) {
@@ -50,7 +51,6 @@ public class GameController {
             }
         }
 
-        return 0;
     }
 
     //Crea la lista de CharFields
@@ -60,7 +60,7 @@ public class GameController {
         //Adiciona a cada CharField su caracter correspondiente de forma oculta
         for (int i = 0; i < word.length(); i++) {
             CharField charField = new CharField(word.charAt(i));
-            charField.setPrefWidth(40);
+            charField.setFont(Font.font("Arial Bold", 19));
             HboxCharFields.getChildren().add(charField);
         }
     }

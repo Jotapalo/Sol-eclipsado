@@ -1,8 +1,9 @@
 package com.example.soleclipsado.models;
 
-import javafx.scene.control.TextField;
+import javafx.geometry.Insets;
+import javafx.scene.control.Label;
 
-public class CharField extends TextField {
+public class CharField extends Label {
 
     public char secret_char;
 
@@ -21,7 +22,7 @@ public class CharField extends TextField {
     public void validateInputCharacter(char c) {
         if (secret_char == c) {
             setText(secret_char);
-            setDisable(true);
+            //setDisable(true);
         }
     }
 }
