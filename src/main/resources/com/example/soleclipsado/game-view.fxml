@@ -20,7 +20,7 @@
             <Insets top="20.0" />
          </BorderPane.margin>
          <children>
-            <ImageView fitHeight="81.0" fitWidth="98.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imageView" fitHeight="81.0" fitWidth="98.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/pngwing.com.png" />
                </image>

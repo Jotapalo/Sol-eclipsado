@@ -18,7 +18,7 @@ public class CharField extends Label {
         setMinHeight(35);
         setMinWidth(35);
 
-        setStyle("-fx-border-color: black; -fx-border-width: 2;");
+        setStyle("-fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 10");
 
         setPadding(new Insets(0, 0, 0, 9));
 

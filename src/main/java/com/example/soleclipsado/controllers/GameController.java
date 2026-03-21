@@ -10,10 +10,13 @@ import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -30,6 +33,9 @@ public class GameController {
 
     @FXML
     Button ButtonHelp;
+
+    @FXML
+    ImageView imageView;
 
     SecretWord secretWord;
 
@@ -68,10 +74,13 @@ public class GameController {
             }
         }
 
+        System.out.println(missingLetters);
 
         if  (!valid) { // Si la letra no se encuentra en las letras que faltan entonces el usuario cometio un error
             failures++;//Aumentar el contador de errores
             node.setStyle("-fx-background-color: red;");
+            System.out.print("com/example/soleclipsado/images/Recurso "+ (failures+1) + ".png");
+            imageView.setImage(new Image(getClass().getResourceAsStream("/com/example/soleclipsado/images/Recurso "+ (failures+1) + ".png")));
         } else {
             node.setStyle("-fx-background-color: green;");
         }
