@@ -18,7 +18,6 @@ import javafx.stage.Stage;
 import java.util.*;
 import java.util.stream.Collectors;
 
-
 public class GameController {
     @FXML
     GridPane GridPaneKeyWord;
@@ -39,6 +38,8 @@ public class GameController {
 
     Set<Character> missingLetters;
 
+    /*Metodo que hace referencia a la instancia de secretWord al gameController, y carga la primera lista con las
+    palabras que faltan*/
     public void setSecretWord(SecretWord s){
         secretWord = s;
         missingLetters = stringToCharSet(removeDiacritics(secretWord.getWord()));
@@ -57,27 +58,25 @@ public class GameController {
         boolean valid = false;
         for (Node n : HboxCharFields.getChildren()) {
             if (n instanceof CharField charField) {
-                if (charField.validateInputCharacter(id.charAt(0))) {
+                if (charField.validateInputCharacter(id.charAt(0))) { //Evalua si la tecla es valida
                     valid = true;
-                    if (!wordsFound.contains(id.charAt(0))) {
-                        wordsFound.add(id.charAt(0));
-                        missingLetters.removeAll(listToCharSet(wordsFound));
+                    if (!wordsFound.contains(id.charAt(0))) { //Utilizado para no agregar mas de una vez la misma letra
+                        wordsFound.add(id.charAt(0)); //Agrega la letra a lista de palabras encontradas
+                        missingLetters.removeAll(listToCharSet(wordsFound)); //Operacion de diferencia, actualiza la lista de letras restantes
                     }
                 }
             }
         }
 
-        System.out.println(missingLetters);
 
-        //Aumentar el contador de errores
-        if  (!valid) {
-            failures++;
+        if  (!valid) { // Si la letra no se encuentra en las letras que faltan entonces el usuario cometio un error
+            failures++;//Aumentar el contador de errores
             node.setStyle("-fx-background-color: red;");
         } else {
             node.setStyle("-fx-background-color: green;");
         }
 
-        if (missingLetters.isEmpty()) {
+        if (missingLetters.isEmpty()) { // cuando no faltan mas letras es por que el usuario gano.
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("¡Victoria!");
             alert.setHeaderText("¡GANASTE!");
@@ -87,7 +86,7 @@ public class GameController {
             Stage stage = (Stage) GridPaneKeyWord.getScene().getWindow();
             stage.close();
         }
-        else if (failures == 5) {
+        else if (failures == 5) { //Si todavia quedan letras cubre los 5 errores entonces el usuario pierde
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("¡Derrota!");
             alert.setHeaderText("¡PERDISTE!");
@@ -111,12 +110,15 @@ public class GameController {
         }
     }
 
+
+    //Convierte un String en un objeto tipo Set
     private Set<Character> stringToCharSet(String str) {
         return str.chars()
                 .mapToObj(c -> (char) c)
                 .collect(Collectors.toSet());
     }
 
+    // Convierte una Lista de caracteres en un objeto tipo set
     private Set<Character> listToCharSet(List<Character> list) {
         return new HashSet<>(list);
     }
@@ -139,6 +141,7 @@ public class GameController {
 
         missingLetters.removeAll(listToCharSet(wordsFound));
 
+        //Escoge una letra aleatoria de las que faltan por descubrir
         char randomLetter = new ArrayList<>(missingLetters).get(new Random().nextInt(missingLetters.size()));
 
         // Busca el boton asociado a la letra random que se filtro, simula el click en este boton que activa el onActionKey
