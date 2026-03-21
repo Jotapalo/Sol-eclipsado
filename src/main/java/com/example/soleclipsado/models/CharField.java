@@ -3,6 +3,8 @@ package com.example.soleclipsado.models;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 
+import static com.example.soleclipsado.models.StringTools.removeDiacritics;
+
 public class CharField extends Label {
 
     public char secret_char;
@@ -10,6 +12,15 @@ public class CharField extends Label {
     public CharField(char letter) {
         super();
         this.secret_char = letter;
+        setPrefHeight(35);
+        setPrefWidth(35);
+        setMinHeight(35);
+        setMinWidth(35);
+
+        setStyle("-fx-border-color: black; -fx-border-width: 2;");
+
+        setPadding(new Insets(0, 0, 0, 9));
+
     }
 
 
@@ -19,10 +30,14 @@ public class CharField extends Label {
 
 
     //Valida que si el caracter que se le envio a comprobar coincide con su caracter oculto entonces se muestra
-    public void validateInputCharacter(char c) {
-        if (secret_char == c) {
+    public boolean validateInputCharacter(char c) {
+        char normalizedSecretChar = removeDiacritics(String.valueOf(secret_char))
+                .toUpperCase().charAt(0);
+
+        if (normalizedSecretChar == Character.toUpperCase(c)) {
             setText(secret_char);
-            //setDisable(true);
+            return true;
         }
+        return false;
     }
 }

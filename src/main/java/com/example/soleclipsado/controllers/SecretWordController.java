@@ -23,9 +23,11 @@ public class SecretWordController {
             SecretWord secret = new SecretWord();
             secret.setWord(word.toUpperCase());
 
+
             //Obtener la instancia del GameView
             GameView gameView = GameView.getInstance();
             GameController gameController = gameView.getController();
+            gameController.setSecretWord(secret);
 
             //Establecer la palabra secreta y crear los campos de las letras
             gameController.createCharFields(secret.getWord());

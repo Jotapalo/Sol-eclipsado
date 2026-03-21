@@ -3,21 +3,25 @@ package com.example.soleclipsado.controllers;
 
 import com.example.soleclipsado.models.CharField;
 import com.example.soleclipsado.models.SecretWord;
+import static com.example.soleclipsado.models.StringTools.removeDiacritics;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
+import javafx.stage.Stage;
+
+import java.util.*;
+import java.util.stream.Collectors;
+
 
 public class GameController {
-
-    //public Button[][] keyword;
-
     @FXML
-    Text textSecretReveal;
+    GridPane GridPaneKeyWord;
 
     @FXML
     HBox HboxCharFields;
@@ -30,12 +34,17 @@ public class GameController {
 
     SecretWord secretWord;
 
-    //Permite establecer el texto de ayuda para pruebas que muestra la palabra secreta
+    int failures = 0;
+    List<Character> wordsFound = new ArrayList<Character>();
+
+    Set<Character> missingLetters;
+
     public void setSecretWord(SecretWord s){
         secretWord = s;
-        textSecretReveal.setText(secretWord.getWord());
+        missingLetters = stringToCharSet(removeDiacritics(secretWord.getWord()));
     }
 
+    //Event Handler de las letras a presionar
     public void onActionKey(ActionEvent event){
         // Desactiva la tecla que ha sido presionada por el usuario
         Node node = (Node) event.getSource();
@@ -45,12 +54,49 @@ public class GameController {
         System.out.print("Button click " + id.toUpperCase());
 
         //Recorre los CharField existentes buscando si la letra presionada en el evento coincide con alguna de la palabra
+        boolean valid = false;
         for (Node n : HboxCharFields.getChildren()) {
             if (n instanceof CharField charField) {
-                charField.validateInputCharacter(id.charAt(0));
+                if (charField.validateInputCharacter(id.charAt(0))) {
+                    valid = true;
+                    if (!wordsFound.contains(id.charAt(0))) {
+                        wordsFound.add(id.charAt(0));
+                        missingLetters.removeAll(listToCharSet(wordsFound));
+                    }
+                }
             }
         }
 
+        System.out.println(missingLetters);
+
+        //Aumentar el contador de errores
+        if  (!valid) {
+            failures++;
+            node.setStyle("-fx-background-color: red;");
+        } else {
+            node.setStyle("-fx-background-color: green;");
+        }
+
+        if (missingLetters.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("¡Victoria!");
+            alert.setHeaderText("¡GANASTE!");
+            alert.setContentText("¡Felicidades!");
+            alert.showAndWait();
+
+            Stage stage = (Stage) GridPaneKeyWord.getScene().getWindow();
+            stage.close();
+        }
+        else if (failures == 5) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("¡Derrota!");
+            alert.setHeaderText("¡PERDISTE!");
+            alert.setContentText("La palabra era: " + secretWord.getWord());
+            alert.showAndWait();
+
+            Stage stage = (Stage) GridPaneKeyWord.getScene().getWindow();
+            stage.close();
+        }
     }
 
     //Crea la lista de CharFields
@@ -65,14 +111,20 @@ public class GameController {
         }
     }
 
+    private Set<Character> stringToCharSet(String str) {
+        return str.chars()
+                .mapToObj(c -> (char) c)
+                .collect(Collectors.toSet());
+    }
+
+    private Set<Character> listToCharSet(List<Character> list) {
+        return new HashSet<>(list);
+    }
+
     //Evento de presionar el boton de ayuda
     @FXML
     public void onActionHelpButton(ActionEvent event){
         System.out.println("Pressed help button");
-
-        /* Hay que agregar la logica que permite revelar un campo de forma aleatoria de la palabra
-        * para esto se puede escanear que letras ya estan reveladas, y comparar cuales quedan por revelar
-        * usando la palabra secreta como referencia*/
 
         int counter = Integer.parseInt(LabelRemainingAids.getText());
         int newCounter = counter - 1;
@@ -83,6 +135,21 @@ public class GameController {
 
         if (newCounter == 0){
             ButtonHelp.setDisable(true);
+        }
+
+        missingLetters.removeAll(listToCharSet(wordsFound));
+
+        char randomLetter = new ArrayList<>(missingLetters).get(new Random().nextInt(missingLetters.size()));
+
+        // Busca el boton asociado a la letra random que se filtro, simula el click en este boton que activa el onActionKey
+        for (Node node : GridPaneKeyWord.getChildren()) {
+            if (node instanceof Button) {
+                Button btn = (Button) node;
+                if (btn.getText().equalsIgnoreCase(String.valueOf(randomLetter))) {
+                    btn.fire();
+                    break;
+                }
+            }
         }
     }
 
